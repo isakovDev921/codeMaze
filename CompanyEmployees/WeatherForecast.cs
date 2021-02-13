@@ -4,7 +4,7 @@ namespace CompanyEmployees
 {
     public class WeatherForecast
     {
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; }//כמהמכה
 
         public int TemperatureC { get; set; }
 
