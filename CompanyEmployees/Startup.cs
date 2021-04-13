@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog;
-//bdb3453456787777
 using System.IO;
 
 namespace CompanyEmployees
@@ -21,7 +20,7 @@ namespace CompanyEmployees
         }       
         public IConfiguration Configuration { get; }
 
-        //   //  This method gets called by the runtime. Use this method to add services to the container.
+        //This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureCors();
@@ -34,7 +33,7 @@ namespace CompanyEmployees
             services.AddControllers();
         }
 
-        // // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        //This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerManager logger)
         {
             if (env.IsDevelopment())
