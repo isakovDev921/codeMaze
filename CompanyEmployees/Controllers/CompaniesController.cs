@@ -59,7 +59,6 @@ namespace CompanyEmployees.Controllers
                 var companyDto = _mapper.Map<CompanyDto>(company);
                 return Ok(companyDto);
             }
-
         }
            
     }
