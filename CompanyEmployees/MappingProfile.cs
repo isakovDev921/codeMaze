@@ -23,6 +23,8 @@ namespace CompanyEmployees
             CreateMap<EmployeeForCreationDto, Employee>();
 
             CreateMap<EmployeeForUpdateDto, Employee>();
+
+            CreateMap<CompanyForUpdateDto, Company>();
         }
     }
 }

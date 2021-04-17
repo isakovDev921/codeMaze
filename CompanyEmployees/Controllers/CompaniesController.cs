@@ -96,8 +96,8 @@ namespace CompanyEmployees.Controllers
         [HttpPost("collection")]
         public IActionResult CreateCompanyCollection(
             [FromBody]IEnumerable<CompanyForCreationDto> companyCollection)
-        { 
-            if(companyCollection == null)
+        {
+            if (companyCollection == null)
             {
                 _logger.LogError("Company collection send from client is null.");
                 return BadRequest("Company collection is null");
@@ -113,7 +113,7 @@ namespace CompanyEmployees.Controllers
 
             var companyCollectionToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities);
 
-            var ids = string.Join(",", companyCollectionToReturn.Select(c=> c.Id));
+            var ids = string.Join(",", companyCollectionToReturn.Select(c => c.Id));
 
             return CreatedAtRoute("CompanyCollection", new { ids }, companyCollectionToReturn);
         }
@@ -131,5 +131,22 @@ namespace CompanyEmployees.Controllers
 
             return NoContent();
         }
-    }   
+
+        [HttpPut("{id}")] 
+        public IActionResult UpdateCompany(Guid id, 
+            [FromBody] CompanyForUpdateDto company) 
+        { 
+            if (company == null) { _logger.LogError("CompanyForUpdateDto object sent from client is null."); 
+                return BadRequest("CompanyForUpdateDto object is null");
+            } 
+            var companyEntity = _repository.Company.GetCompany(id, trackChanges: true);//отслеживать изменения для апдейта
+            if (companyEntity == null) { _logger.LogInfo($"Company with id: {id} doesn't exist in the database.");
+                return NotFound(); } 
+            
+            _mapper.Map(company, companyEntity); 
+            
+            _repository.Save();
+            return NoContent(); }
+
+    }
 }
