@@ -1,11 +1,10 @@
 ﻿using Contracts;
 using Entities;
-
 using Entities.Models;
 using Entities.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
+using Repository.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -50,9 +49,10 @@ namespace Repository
             //    .Take(employeeParameters.PageSize)
             //    .ToListAsync();
 
-            var employee = await FindByCondition(e => e.CompanyId.Equals(companyId)
-            && (e.Age >= employeeParameters.MinAge && e.Age <= employeeParameters.MaxAge)
-            , trackChanges)
+            var employee = await FindByCondition(e => e.CompanyId.Equals(companyId),
+             trackChanges)
+                .FilterEmployees(employeeParameters.MinAge, employeeParameters.MaxAge)
+                .Search(employeeParameters.SearchTerm)
                 .OrderBy(e => e.Name)
                 .ToListAsync();
 
