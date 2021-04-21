@@ -50,7 +50,9 @@ namespace Repository
             //    .Take(employeeParameters.PageSize)
             //    .ToListAsync();
 
-            var employee = await FindByCondition(e => e.CompanyId.Equals(companyId), trackChanges)
+            var employee = await FindByCondition(e => e.CompanyId.Equals(companyId)
+            && (e.Age >= employeeParameters.MinAge && e.Age <= employeeParameters.MaxAge)
+            , trackChanges)
                 .OrderBy(e => e.Name)
                 .ToListAsync();
 
