@@ -52,13 +52,13 @@ namespace CompanyEmployees
             });
 
             services.AddControllers(config =>
-            {
-                config.RespectBrowserAcceptHeader = true;
-                config.ReturnHttpNotAcceptable = true;
-            }).AddNewtonsoftJson()
+           {
+               config.RespectBrowserAcceptHeader = true;
+               config.ReturnHttpNotAcceptable = true;
+           }).AddNewtonsoftJson()
            .AddXmlDataContractSerializerFormatters()
            .AddCustomCSVFormatter();
-
+            
             services.AddCustomMediaTypes();
 
         }
